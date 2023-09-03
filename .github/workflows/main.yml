@@ -44,11 +44,6 @@ jobs:
          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
         with:
          command: monitor
- # get_lambda_function:
-  #  runs-on: ubuntu-latest
-   # steps:
-    #  - name: Get lambda config
-     #   run: aws cli get-function-url-config --function-name 
   zap_scan:
     runs-on: ubuntu-latest
     needs: unit-testing
@@ -102,3 +97,7 @@ jobs:
         env:
              AWS_ACCESS_KEY_ID:  ${{ secrets.AWS_ACCESS_KEY_ID }}
              AWS_SECRET_ACCESS_KEY:  ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      - name: Set Deployment URL Output
+        id: set_deployment_url
+        run: echo "::set-output name=deployment_url::${{ steps.serverless_deploy.outputs.deploy-url }}"
+     
