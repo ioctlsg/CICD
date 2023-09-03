@@ -65,7 +65,7 @@ jobs:
       - name: Get API Gateway URL and Save as State
         id: get_api_gateway_url
         run: |
-            api_gateway_url=$(aws apigateway get-resources --rest-api-id AugCDCI-dev-api --query 'items[0].resourceMethods.GET.methodIntegration.uri' --output text)
+            api_gateway_url=$(aws apigateway get-resources --rest-api-id 9w2itn60t2 --query 'items[0].resourceMethods.GET.methodIntegration.uri' --output text)
             echo "::set-output name=api_gateway_url::${api_gateway_url}"
            
       - name: Sleep for 60 seconds #wait for lambda to be deploy
