@@ -72,7 +72,7 @@ jobs:
       - name: Get API Gateway URL
         run: |
             set -x
-            api_gateway_url=$(aws apigateway get-resources --rest-api-id p3h4utyda7 --query 'items[0].resourceMethods.GET.methodIntegration.uri' --output text)
+            api_gateway_url=$(aws apigateway get-resources --rest-api-id rgxmd1v0t3 --query 'items[0].resourceMethods.GET.methodIntegration.uri' --output text)
             echo "::set-output name=api_gateway_url::${api_gateway_url}"
         shell: /usr/bin/bash -e {0}
       - name: Sleep for 60 seconds #wait for lambda to be deploy
