@@ -62,8 +62,12 @@ jobs:
         env:
              AWS_ACCESS_KEY_ID:  ${{ secrets.AWS_ACCESS_KEY_ID }}
              AWS_SECRET_ACCESS_KEY:  ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-      - name: Save Deployment URL as State
-        run: echo "::set-state name=deployment_url::${{ steps.serverless_deploy.outputs.deploy-url }}"
+      - name: Get API Gateway URL and Save as State
+        id: get_api_gateway_url
+        run: |
+            api_gateway_url=$(aws apigateway get-resources --rest-api-id YourRestApiId --query 'items[0].resourceMethods.GET.methodIntegration.uri' --output text)
+            echo "::set-output name=api_gateway_url::${api_gateway_url}"
+            echo "api_gateway_url=${api_gateway_url}" >> $GITHUB_ENV
            
       - name: Sleep for 60 seconds #wait for lambda to be deploy
         run: sleep 60
@@ -75,7 +79,7 @@ jobs:
       - name: ZAP Scan
         uses: zaproxy/action-api-scan@v0.5.0
         with:
-          target: "echo ${{ github.states.deployment_url }}"
+          target: ${{ env.api_gateway_url }}
      
   merge:
     runs-on: ubuntu-latest
