@@ -65,6 +65,8 @@ jobs:
       - name: Set Deployment URL Output
         id: set_deployment_url
         run: echo "::set-output name=deployment_url::${{ steps.serverless_deploy.outputs.deploy-url }}"
+      - name: Sleep for 60 seconds #wait for lambda to be deploy
+        run: sleep 60
   zap_scan:
     runs-on: ubuntu-latest
     needs: deploy-dev
