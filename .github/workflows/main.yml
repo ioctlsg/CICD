@@ -67,7 +67,6 @@ jobs:
         run: |
             api_gateway_url=$(aws apigateway get-resources --rest-api-id YourRestApiId --query 'items[0].resourceMethods.GET.methodIntegration.uri' --output text)
             echo "::set-output name=api_gateway_url::${api_gateway_url}"
-            echo "api_gateway_url=${api_gateway_url}" >> $GITHUB_ENV
            
       - name: Sleep for 60 seconds #wait for lambda to be deploy
         run: sleep 60
