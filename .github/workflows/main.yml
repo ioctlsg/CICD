@@ -62,19 +62,6 @@ jobs:
         env:
              AWS_ACCESS_KEY_ID:  ${{ secrets.AWS_ACCESS_KEY_ID }}
              AWS_SECRET_ACCESS_KEY:  ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-     # - name: Get API Gateway URL and Save as State
-      #  id: get_api_gateway_url
-       # run: |
-        #    api_gateway_url=$(aws apigateway get-resources --rest-api-id 9w2itn60t2 --query 'items[0].resourceMethods.GET.methodIntegration.uri' --output text)
-         #   echo "::set-output name=api_gateway_url::${api_gateway_url}"
-      - name: Verify AWS CLI Version
-        run: aws --version     
-      - name: Get API Gateway URL
-        run: |
-            set -x
-            api_gateway_url=$(aws apigateway get-resources --rest-api-id rgxmd1v0t3 --query 'items[0].resourceMethods.GET.methodIntegration.uri' --output text)
-            echo "::set-output name=api_gateway_url::${api_gateway_url}"
-        shell: /usr/bin/bash -e {0}
       - name: Sleep for 60 seconds #wait for lambda to be deploy
         run: sleep 60
   zap_scan:
@@ -82,10 +69,12 @@ jobs:
     needs: deploy-dev
     name: OWASP Scan the webapplication
     steps:
+      - name: Show API Gateway URL
+        run: echo "API Gateway URL: $api_gateway_url"
       - name: ZAP Scan
         uses: zaproxy/action-api-scan@v0.5.0
         with:
-          target: ${{ env.api_gateway_url }}
+          target: $api_gateway_url
      
   merge:
     runs-on: ubuntu-latest
