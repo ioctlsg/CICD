@@ -75,7 +75,7 @@ jobs:
       - name: ZAP Scan
         uses: zaproxy/action-api-scan@v0.5.0
         with:
-          target: ${{ github.states.deployment_url }}
+          target: "echo ${{ github.states.deployment_url }}"
      
   merge:
     runs-on: ubuntu-latest
