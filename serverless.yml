@@ -1,4 +1,4 @@
-service: AugCDCI
+service: CDCI-Dev
 frameworkVersion: '3'
 
 provider: 
