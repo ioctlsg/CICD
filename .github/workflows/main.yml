@@ -87,7 +87,7 @@ jobs:
           type: now
           target_branch: main
           github_token: ${{ secrets.GITHUB_TOKEN }}
-  deploy-production:
+  deploy-production: #using new IAM user as g4p
     runs-on: ubuntu-latest
     needs: merge
     steps:
@@ -97,6 +97,20 @@ jobs:
         with:
          node-version: ${{ matrix.node-version }}
       - run: npm ci
+      - name: Run npm init to change project name (Dev)
+        run: |
+          echo '{
+            "name": "Production_API",
+            "version": "1.0.0",
+            "description": "discount code",
+            "main": "index.js",
+            "scripts": {
+              "test": "echo \\"Error: no test specified\\" && exit 1"
+            },
+            "keywords": [],
+            "author": "Gourp 4 capstone",
+            "license": "ISC"
+          }' > package.json
       - name: serverless deploy
         uses: serverless/github-action@v3.2
         with:
