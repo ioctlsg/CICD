@@ -100,7 +100,7 @@ jobs:
       - run: npm install serverless
       - run: aws configure set default.region ap-southeast-2
       - run: npm install express
-      - name: Run npm init to change project name (Dev)
+      - name: Run npm init to change project name
         run: |
           echo '{
             "name": "Production_API",
