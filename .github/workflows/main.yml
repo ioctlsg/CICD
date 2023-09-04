@@ -97,6 +97,8 @@ jobs:
         with:
          node-version: ${{ matrix.node-version }}
       - run: npm ci
+      - run: npm install serverless
+      - run: npm install express
       - name: Run npm init to change project name (Dev)
         run: |
           echo '{
