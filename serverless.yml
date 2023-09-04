@@ -9,7 +9,7 @@ provider:
     name: cohort2.serverless.deploys
 
 functions:
-  api:  
+  Group4_capstone:  
     handler: index.handler
     events:
     -  httpApi:
