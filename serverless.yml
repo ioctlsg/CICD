@@ -9,7 +9,7 @@ provider:
     name: cohort2.serverless.deploys
 
 functions:
-  api:
+  api: Group4_CICD
     handler: index.handler
     events:
     -  httpApi:
