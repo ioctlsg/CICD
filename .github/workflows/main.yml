@@ -98,7 +98,7 @@ jobs:
          node-version: ${{ matrix.node-version }}
       - run: npm ci
       - run: npm install serverless
-      - run: npm install -n serverless-offline
+      - run: sudo npm install -n serverless-offline -g
       - run: npm install express
       - name: Run npm init to change project name (Dev)
         run: |
@@ -111,7 +111,7 @@ jobs:
               "test": "echo \\"Error: no test specified\\" && exit 1"
             },
             "keywords": [],
-            "author": "Gourp 4 capstone",
+            "author": "Group 4 capstone",
             "license": "ISC"
           }' > package.json
       - name: serverless deploy
