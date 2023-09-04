@@ -100,20 +100,7 @@ jobs:
      # - run: npm install serverless
       - run: git checkout main
      # - run: npm install express
-      - name: Run npm init to change project name
-        run: |
-          echo '{
-            "name": "Production_API",
-            "version": "1.0.0",
-            "description": "discount code",
-            "main": "index.js",
-            "scripts": {
-              "test": "echo \\"Error: no test specified\\" && exit 1"
-            },
-            "keywords": [],
-            "author": "Group 4 capstone",
-            "license": "ISC"
-          }' > package.json
+     
       - name: serverless deploy
         uses: serverless/github-action@v3.2
         with:
