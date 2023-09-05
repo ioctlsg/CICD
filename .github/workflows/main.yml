@@ -97,7 +97,7 @@ jobs:
         with:
          node-version: ${{ matrix.node-version }}
       - run: npm ci
-      #- run: git checkout main
+      - run: git branch -a
       - name: serverless deploy
         uses: serverless/github-action@v3.2
         with:
